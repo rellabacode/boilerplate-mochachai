@@ -2,7 +2,7 @@ const chai = require('chai');
 const assert = chai.assert;
 
 const server = require('../server');
-
+require('dotenv').config();
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
@@ -67,10 +67,17 @@ suite('Functional Tests', function () {
 });
 
 const Browser = require('zombie');
+Browser.site = process.env.SITE;
+console.log("browser site "+ Browser.site);
 
 suite('Functional Tests with Zombie.js', function () {
+    const browser = new Browser();
     this.timeout(5000);
 
+    suiteSetup(function (done) {
+        console.log("suitesetup");
+        return browser.visit("/", done);
+    });
 
     suite('Headless browser', function () {
         test('should have a working "site" property', function () {
