@@ -41,31 +41,16 @@ suite('Functional Tests', function () {
                 })
                 .end(function (err, res) {
                     assert.equal(res.status, 200);
-                    assert.deepEqual({
-                        "name": "Cristoforo",
-                        "surname": "Colombo",
-                        "dates": "1451 - 1506"
-                    }, JSON.parse(res.text));
+                    assert.equal(res.get("Content-type").split("; ")[0], "application/json");
+                    assert.equal(res.body.name, "Cristoforo");
+                    assert.equal(res.body.surname, "Colombo");
                     done();
                 });
         });
         // #4
         test('Send {surname: "da Verrazzano"}', function (done) {
-            chai.request(server)
-                .put("/travellers")
-                .send({
-                    surname: "da Verrazzano"
-                })
-                .end(function (err, res) {
-                    assert.equal(res.status, 200);
-                    assert.deepEqual({
-                        "name": "Giovanni",
-                        "surname": "da Verrazzano",
-                        "dates": "1485 - 1528"
-                    }, JSON.parse(res.text));
-                    done();
-                })
-
+            assert.fail();
+            done();
         });
     });
 });
