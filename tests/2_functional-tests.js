@@ -68,7 +68,7 @@ suite('Functional Tests', function () {
 
 const Browser = require('zombie');
 Browser.site = process.env.SITE;
-console.log("browser site "+ Browser.site);
+console.log("browser site " + Browser.site);
 
 suite('Functional Tests with Zombie.js', function () {
     const browser = new Browser();
@@ -88,15 +88,14 @@ suite('Functional Tests with Zombie.js', function () {
     suite('"Famous Italian Explorers" form', function () {
         // #5
         test('Submit the surname "Colombo" in the HTML form', function (done) {
-            assert.fail();
-
-            done();
+            // console.log(browser.fill);
+            browser.fill('surname', 'Colombo');
+            browser.pressButton('submit', done);
         });
         // #6
         test('Submit the surname "Vespucci" in the HTML form', function (done) {
-            assert.fail();
-
-            done();
+            browser.fill('surname', 'Vespucci');
+            browser.pressButton('submit', done);
         });
     });
 });
